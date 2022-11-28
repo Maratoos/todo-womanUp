@@ -22,7 +22,7 @@ export const Todos = () => {
   return (
     <div className="todo__board">
       {isLoading && <p className='loading'>Загрузка...</p>}
-      {documents.length > 0 ?
+      {documents.length > 0 &&
         documents.map((todo) => (
           <div style={{background: `${todo.isCompleted ? "green" : "red"}`}} key={todo.id} className="todo__board-todo">
             <div className='todo__board-todo-top'>
@@ -39,9 +39,8 @@ export const Todos = () => {
             <button className='completed' onClick={() => handleSetIsCompleted(todo)}>{todo.isCompleted ? "Отменить завершение" : "Завершить"}</button>
           </div>
         ))
-        :
-        <p className='loading'>Задач еще нет</p>
       }
+      {!documents && <p className='loading'>Задач еще нет</p>}
     </div>
   )
 }

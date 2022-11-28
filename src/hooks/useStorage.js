@@ -5,14 +5,11 @@ import { useParams } from "react-router-dom"
 import { useState } from "react"
 
 export const useStorage = () => {
-    const [imageLoading, setImageLoading] = useState(false)
     const [error, setError] = useState("")
     const params = useParams()
 
     const updateImages = async (files, images = []) => {
         try {
-            setImageLoading(true)
-
             let filesUrl = files.map(async (file) => {
                 return new Promise(async (res, rej) => {
                     try {
@@ -34,14 +31,14 @@ export const useStorage = () => {
                 }, {
                     merge: true,
                 })
+
             })
 
-            setImageLoading(false)
         } catch (err) {
             setImageLoading(false)
             setError(err.message)
         }
     }
 
-    return { updateProfileImage, updateProfileBackgroundImage, updateImages, imageLoading }
+    return { updateImages }
 } 

@@ -10,9 +10,10 @@ import './style.css'
 
 export const Todo = () => {
   const { documents, isLoading } = getCollection("todos")
-  const { updateImages, imageLoading } = useStorage()
+  const { updateImages } = useStorage()
   const params = useParams()
   const navigate = useNavigate()
+  const [imageLaoding, setImageLoading] = useState(false)
   const [files, setFiles] = useState([])
   const [validate, setValidate] = useState("")
   const [changeDoc, setChangeDoc] = useState(false)
@@ -21,12 +22,14 @@ export const Todo = () => {
   const [newDate, setNewDate] = useState()
 
   const handleUpdateImages = async () => {
+    setImageLoading(true)
     let currArr = documents.filter(todo => todo.id === params.id)[0]?.images
     if (!files.length) setValidate("Выберите картинку")
     if (files.length > 5) setValidate("Выберите до 5 файлов")
     if (files.length <= 5) {
       await updateImages(files, currArr)
     }
+    setImageLoading(false)
   }
 
   const handleFilesChange = (e) => {
@@ -42,7 +45,7 @@ export const Todo = () => {
     await updateDoc(doc(db, "todos", todo.id), {
       title: newTitle ?? todo.title,
       description: newDescription ?? todo.description,
-      date: new Date(newDate) ?? todo.date
+      date: newDate ? new Date(newDate) : todo.date
     })
   }
 
@@ -61,8 +64,8 @@ export const Todo = () => {
             <div className='todo__description'>
               {changeDoc ?
                 <>
-                  <input type="text" defaultValue={todo.description} onChange={(e) => setNewDescription(e.target.value)} />
-                  <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} />
+                  <textarea style={{width: "400px", height: "300px"}} type="text" defaultValue={todo.description} onChange={(e) => setNewDescription(e.target.value)}></textarea>
+                  <input style={{maxWidth: "200px", maxHeight: "30px"}} type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} />
                 </>
                 :
                 <>
@@ -82,7 +85,7 @@ export const Todo = () => {
               </div>
               <div className="add-more-photos">
                 <input onChange={handleFilesChange} type="file" multiple />
-                <button onClick={handleUpdateImages} type="submit" disabled={imageLoading} >Добавить новые фото?</button>
+                <button onClick={handleUpdateImages} type="submit" disabled={imageLaoding} >Добавить новые фото?</button>
                 {validate && validate}
               </div>
             </div>
