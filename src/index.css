@@ -1,0 +1,21 @@
+html, body, h1, h2, h3, h4, h5, h6, p, span {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato";
+}
+
+a{
+    text-decoration: none;
+}
+
+.loading {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 130%;
+    
+    text-align: center;
+    
+    color: #1E212C;
+}

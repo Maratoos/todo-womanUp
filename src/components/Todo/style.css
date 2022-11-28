@@ -1,0 +1,71 @@
+.todo {
+    text-align: center;
+    margin: 0 200px;
+}
+
+.todo__description {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo__description p {
+    width: 80%;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    
+    line-height: 150%;
+    
+    color: #1E212C;
+}
+
+.todo__description span {
+    width: 20%;
+}
+
+.todo__middle {
+    margin-top: 50px;
+}
+
+.todo__images {
+    margin-bottom: 25px;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.todo__image {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 10px 0 10px;
+}
+
+.add-more-photos {
+    display: flex;
+    justify-content: center;
+}
+
+.add-more-photos p {
+    margin-left: 15px;
+}
+
+.change-delete__holder {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+
+    margin: 50px 0;
+}
+
+.todo__change, .todo__delete {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.back {
+    margin:50px 0 0 50px;
+    cursor: pointer;
+}
